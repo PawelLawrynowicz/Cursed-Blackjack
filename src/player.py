@@ -9,8 +9,8 @@ class Player:
         self.deck = deck
         self.score = 0
 
-    def deal(self):
-        self.hand.append(self.deck.draw())
+    def deal(self, card):
+        self.hand.append(card)
 
     def declare_bet(self, bet):
         return bet
