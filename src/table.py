@@ -36,7 +36,7 @@ class Window:
         self.player_cards_y = self.height//2+3
 
         self.paint_decksize()
-        self.draw_back(3, 2)
+        self.paint_back(3, 2)
         #self.card = Card("10", "SPADES")
         #self.paint_card(3, 15, self.card)
         #self.paint_card(3 + 1, 20, self.card)
@@ -72,7 +72,7 @@ class Window:
         side.addstr(y+5, x, f"│    {card.rank:>2} │")
         side.addstr(y+6, x, "└───────┘")
 
-    def draw_back(self, y, x):
+    def paint_back(self, y, x):
         self.window.addstr(y, x,   "┌───────┐")
         for i in range(5):
             self.window.addstr(y+i+1, x, "│       │")
@@ -114,9 +114,19 @@ class Window:
             5 - comparing scores
         """
         stages = {0: "DECLARE YOUR BALANCE", 1: "PLACE YOUR BET", 2: "DEALING CARDS",
-                  3: "HIT OR STAND?", 4: "DEALER DRAWING", 5: "PLAY NEXT ROUND?"}
+                  3: "HIT OR STAND?", 4: "DEALER DRAWING", 20: "YOU WIN", 21: "DEALER WINS", 22: "PUSH", 30: "PLAY AGAIN?", 10: "BUST, TOO MANY!"}
 
         self.prompt.clear()
         self.prompt.hline(0, 0, curses.ACS_HLINE, self.width//2-1)
         self.prompt.addstr(0, 0, stages[stage])
         self.prompt.refresh()
+
+    def paint_dealer_score(self, score):
+        height, width = self.dealer_side.getmaxyx()
+        self.dealer_side.addstr(height-1, width//2-7,
+                                "DEALER SCORE: " + str(score))
+
+    def paint_player_score(self, score):
+        height, width = self.player_side.getmaxyx()
+        self.player_side.addstr(0, width//2-7,
+                                "PLAYER SCORE: " + str(score))
