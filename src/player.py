@@ -61,8 +61,12 @@ class Player:
     def split(self):
         pass
 
+    def set_money(self, money):
+        self.money = money
 
-# deck = Deck()
-# player = Player(False, 100, deck)
-# player.hand.append(deck.cards.pop(13))
-# print(player.get_score())
+    def get_money(self):
+        return self.money
+    # deck = Deck()
+    # player = Player(False, 100, deck)
+    # player.hand.append(deck.cards.pop(13))
+    # print(player.get_score())

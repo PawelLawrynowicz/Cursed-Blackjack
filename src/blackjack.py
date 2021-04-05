@@ -81,7 +81,7 @@ class Blackjack:
 
     def initiate_game(self):
         self.window.paint_prompt(0)
-        self.player.money = self.window.get_input()
+        self.player.set_money(int(self.window.get_input()))
         self.window.draw_info(self.player.money)
         self.command = ""
 
@@ -90,6 +90,8 @@ class Blackjack:
         self.bust = False
         self.dealer_bust = False
         self.command = ""
+        self.window.info.clear()
+        self.window.draw_info(self.player.get_money())
 
         self.window.refresh()
 
@@ -97,7 +99,7 @@ class Blackjack:
         self.window.paint_prompt(1)
         self.bet = self.window.get_input()
         self.update_balance(self.bet)
-        self.window.draw_info(self.player.money, self.bet)
+        self.window.draw_info(self.player.get_money(), self.bet)
         self.window.info.refresh()
 
     def deal_cards(self):
@@ -171,10 +173,7 @@ class Blackjack:
             self.window.paint_dealer_score(self.dealer.get_score())
             self.window.dealer_side.refresh()
         if self.dealer.get_score() > 21:
-            self.dealer_bust()
-
-    def dealer_bust(self):
-        self.dealer_bust = True
+            self.dealer_bust = True
 
     def compare_scores(self):
         if self.player.get_score() > self.dealer.get_score():
@@ -186,7 +185,6 @@ class Blackjack:
             self.window.paint_prompt(22)
             self.push()
         self.window.info.refresh()
-        time.sleep(5)
 
     def end(self):
         end = False
@@ -199,10 +197,10 @@ class Blackjack:
         return end
 
     def update_balance(self, bet):
-        temp = int(self.player.money)
+        temp = int(self.player.get_money())
         temp -= int(bet)
-        self.player.money = str(temp)
-        self.window.draw_info(self.player.money, bet)
+        self.player.set_money(temp)
+        self.window.draw_info(self.player.get_money(), bet)
 
     def draw_card(self):
         top_card = self.deck.draw()
@@ -214,11 +212,11 @@ class Blackjack:
         self.window.paint_prompt(20)
         self.player.hand = []
         self.dealer.hand = []
-        self.player.money += 2*self.bet
+        self.player.set_money(self.player.get_money() + 2*int(self.bet))
         self.bet = 0
-        self.window.draw_info(self.player.money)
+        self.window.draw_info(self.player.get_money())
         self.window.refresh()
-        time.sleep(5)
+        time.sleep(3)
 
     def dealer_win(self):
         self.player.hand = []
@@ -226,15 +224,16 @@ class Blackjack:
         self.bet = 0
         if self.bust == True:
             self.window.paint_prompt(10)
-        self.window.refresh()
-        time.sleep(5)
+        self.window.draw_info(self.player.get_money())
+        self.window.info.refresh()
+        time.sleep(3)
 
     def push(self):
         self.player.hand = []
         self.dealer.hand = []
-        self.player.money += self.bet
+        self.player.money += int(self.bet)
         self.bet = 0
-        self.window.draw_info(self.player.money)
+        self.window.draw_info(self.player.get_money())
         self.window.refresh()
 
 
