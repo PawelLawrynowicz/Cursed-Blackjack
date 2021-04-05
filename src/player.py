@@ -1,4 +1,5 @@
 from deck import Deck
+from card import Card
 
 
 class Player:
@@ -9,8 +10,8 @@ class Player:
         self.deck = deck
         self.score = 0
 
-    def deal(self):
-        self.hand.append(self.deck.draw())
+    def deal(self, card):
+        self.hand.append(card)
 
     def declare_bet(self, bet):
         return bet
@@ -23,7 +24,7 @@ class Player:
         return 0
 
     def stand(self):
-        return 0
+        return True
 
     def check_score(self):
         self.score = 0
@@ -33,6 +34,8 @@ class Player:
             if value == 1:
                 aces += 1
             self.score += value
+        if aces > 0 and self.score <= 11:
+            self.score += 10
 
     def get_score(self):
         self.check_score()
@@ -57,3 +60,13 @@ class Player:
     # TODO:
     def split(self):
         pass
+
+    def set_money(self, money):
+        self.money = money
+
+    def get_money(self):
+        return self.money
+    # deck = Deck()
+    # player = Player(False, 100, deck)
+    # player.hand.append(deck.cards.pop(13))
+    # print(player.get_score())
