@@ -21,14 +21,16 @@ class Window:
         self.addstr(0, 1, "DEALER")
         self.addstr(self.height//2, 1, "PLAYER")
 
+        curses.curs_set(0)
+
         self.prompt = self.window.derwin(
             1, self.width//2 - 1, self.height//2, self.width//2)
 
         self.dealer_side = self.window.derwin(
-            self.height//2 - 1, self.width-14, 1, 14)
+            self.height//2 - 1, self.width-15, 1, 14)
 
         self.player_side = self.window.derwin(
-            self.height//2 - 2, self.width-14, self.height//2 + 1, 14
+            self.height//2 - 2, self.width-15, self.height//2 + 1, 14
         )
 
         self.cards_x = 15

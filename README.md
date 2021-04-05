@@ -10,7 +10,7 @@ Making the best blackjack game possible is **NOT** a goal of this project. I wan
 If you're not familiar with Blackjack rules, you can find them [here](https://en.wikipedia.org/wiki/Blackjack). I decided not to include card splitting nor doubling down due to lack of time. A player can only hit or stand. Dealer must stand on 17 (soft 17 included) and must draw to 16.
 
 # Presentation
-<img src="presentation.gif" width=100% height=100%/>
+![Alt Text](presentation.gif)
 
 # Missing features
 If you want to build upon this project here are things that are missing from functionality:

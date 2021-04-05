@@ -235,6 +235,7 @@ class Blackjack:
         self.bet = 0
         self.window.draw_info(self.player.get_money())
         self.window.refresh()
+        time.sleep(3)
 
 
 def start(stdscr):
